@@ -24,14 +24,14 @@ public class CategoryService : Service<Category>, ICategoryService
         _uof = uof;
     }
 
-    public async Task<IEnumerable<CategoryDTO>>GetAllAsync()
+    public async Task<IEnumerable<CategoryDTO>> GetAllAsync()
     {
         var categories = await base.GetAllAsync();
         var categoriesDto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
         return categoriesDto;
     }
 
-    public async Task<CategoryDTO>GetAsync(int id)
+    public async Task<CategoryDTO> GetAsync(int id)
     {
         var category = await base.GetAsync(id);
         var categoryDto = _mapper.Map<CategoryDTO>(category);

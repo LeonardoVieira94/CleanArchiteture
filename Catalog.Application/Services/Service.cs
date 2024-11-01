@@ -29,12 +29,14 @@ public class Service<T> : IService<T> where T : Entity
     public async Task<T> Create(T entity)
     {
         var created = _uof.Repository<T>().Create(entity);
+        await _uof.CommitAsync();
         return created;
     }
 
     public async Task <T> Update(T entity)
     {
         var updated = _uof.Repository<T>().Update(entity);
+        await _uof.CommitAsync();
         return updated;
     }
     public async Task <T> Delete(int id)

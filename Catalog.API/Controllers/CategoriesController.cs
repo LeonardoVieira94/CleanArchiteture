@@ -38,24 +38,22 @@ namespace Catalog.API.Controllers
         [HttpPost]
         public async Task<ActionResult<CategoryDTO>> Post(CategoryDTO categoryDto)
         {
-            var newCategory = _categoryService.Create(categoryDto);
+            var newCategory = await _categoryService.Create(categoryDto);
             if (newCategory is null)
             {
                 return BadRequest();
             }
-            await _uof.CommitAsync();
             return new CreatedAtRouteResult("GetById",
             new { id = newCategory.Id }, newCategory);
         }
         [HttpPut]
         public async Task<ActionResult<CategoryDTO>> Put(CategoryDTO categoryDto)
         {
-            var upCategory = _categoryService.Update(categoryDto);
+            var upCategory = await _categoryService.Update(categoryDto);
             if (upCategory is null)
             {
                 return BadRequest();
             }
-            await _uof.CommitAsync();
             return Ok(upCategory);
         }
         [HttpDelete]
